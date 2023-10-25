@@ -1,0 +1,51 @@
+﻿@model BlogManagement.Models.Blog
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2>Update Blog</h2>
+                </div>
+                <div class="card-body">
+                    <form action="/Blog/Update" method="post" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+                            <label asp-for="Title">Title</label>
+                            <input asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Content">Content</label>
+                            <textarea asp-for="Content" class="form-control" rows="5"></textarea>
+                            <span asp-validation-for="Content" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="BlogType">Blog Type</label>
+                            <input asp-for="BlogType" class="form-control" />
+                            <span asp-validation-for="BlogType" class="text-danger"></span>
+                        </div>
+                        <br />
+                        <div class="form-check">
+                            <input asp-for="IsPublic" type="checkbox" class="form-check-input" />
+                            <label class="form-check-label">Public</label>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label asp-for="BlogPhoto">Blog Photo</label>
+                            <input type="file" asp-for="BlogPhoto" name="BlogPhoto" class="form-control-file" />
+                            <span asp-validation-for="BlogPhoto" class="text-danger"></span>
+                        </div>
+                        <br />
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary mt-3">Update Blog</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,101 @@
+﻿@model List<BlogManagement.Models.Blog>
+
+<style>
+    .blog-card {
+        border: 1px solid #e4e4e4;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .blog-card {
+        border: 1px solid #e4e4e4;
+        border-radius: 8px;
+        margin: 10px;
+        padding: 10px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .blog-card:hover {
+        transform: scale(1.02);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .blog-image {
+        max-height: 200px;
+        object-fit: cover;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .blog-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin: 10px 0;
+    }
+
+    .blog-content {
+        font-size: 1rem;
+        flex-grow: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 20px;
+    }
+
+    .blog-info {
+        font-size: 0.9rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+        .blog-info li::before {
+            content: "\2022"; 
+            margin-right: 8px;
+            color: #007BFF;
+        }
+
+    .blog-actions {
+        text-align: right;
+        padding: 20px;
+    }
+</style>
+
+<div class="container mt-4">
+    
+    <div class="row">
+        @foreach (var blog in Model)
+        {
+            <div class="col-md-4">
+                <div class="blog-card">
+                    @if (blog.BlogPhoto != null)
+                    {
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(blog.BlogPhoto)" alt="Blog Image" class="blog-image">
+                    }
+                    <div class="card-body">
+                        <h5 class="blog-title">@blog.Title</h5>
+                        <div class="blog-content">
+                            @blog.Content
+                        </div>
+                        <ul class="blog-info">
+                            <li>Is Public: @(blog.IsPublic ? "Yes" : "No")</li>
+                            <li>Created At: @blog.CreatedAt.ToString("yyyy-MM-dd")</li>
+                            <li>Blog Type: @blog.BlogType</li>
+                        </ul>
+                    </div>
+                    <div class="blog-actions">
+                        <a asp-action="Edit" asp-route-id="@blog.Id" class="btn btn-primary">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@blog.Id" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="text-center mt-4">
+        <a asp-action="Create" class="btn btn-success">Create New Blog</a>
+    </div>
+</div>
